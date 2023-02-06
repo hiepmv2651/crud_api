@@ -35,6 +35,12 @@ Tạo APP_KEY
 php artisan key:generate
 ```
 
+Tạo liên kết và chuyển folder logos vào thư mục public\storage
+
+```bash
+  php artisan storage:link
+```
+
 Tạo cơ sở dữ liệu
 
 ```bash

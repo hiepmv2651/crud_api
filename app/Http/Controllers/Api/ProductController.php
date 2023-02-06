@@ -31,9 +31,9 @@ class ProductController extends Controller
     public function store(ProductStoreRequest $request)
     {
         $validated = $request->validated();
-        // if ($request->hasFile('image')) {
-        //     $validated['image'] = $request->file('image')->store('images', 'public');
-        // }
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('logos', 'public');
+        }
 
         $product = Product::create($validated);
 
@@ -59,13 +59,13 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
 
-        // if ($request->hasFile('image')) {
-        //     if ($product->image) {
-        //         Storage::delete($product->image);
-        //     }
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
 
-        //     $validated['image'] = $request->file('image')->store('images', 'public');
-        // }
+            $validated['image'] = $request->file('image')->store('logos', 'public');
+        }
 
         $product->update($validated);
 
@@ -79,9 +79,9 @@ class ProductController extends Controller
      */
     public function destroy(Request $request, Product $product)
     {
-        // if ($product->image) {
-        //     Storage::delete($product->image);
-        // }
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
 
         $product->delete();
 

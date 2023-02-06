@@ -73,7 +73,7 @@ class UserTest extends TestCase
             'email' => $this->faker->unique->email,
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
-            'gender' => \Arr::random(['male', 'female', 'other']),
+            'gender' => \Arr::random(['male', 'female']),
         ];
 
         $data['password'] = \Str::random('8');

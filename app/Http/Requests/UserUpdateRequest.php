@@ -34,9 +34,9 @@ class UserUpdateRequest extends FormRequest
                 'email',
             ],
             'password' => [
-                'required',
-                'confirmed',
-                new isValidPassword(),
+                // 'required',
+                // 'confirmed',
+                // new isValidPassword(),
             ],
             'address' => ['required', 'max:255', 'string'],
             'phone' => ['required', 'max:255', 'string'],
