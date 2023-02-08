@@ -10,7 +10,6 @@ class ImportController extends Controller
 {
     public function importUser(Request $request)
     {
-
         Excel::import(new UsersImport, $request->file('file'));
         return response()->json([
             'message' => 'Imported successfully',

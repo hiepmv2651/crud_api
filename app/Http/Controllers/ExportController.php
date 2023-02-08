@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\CartsExport;
+use App\Exports\CartUserExport;
 use App\Exports\CategoriesExport;
 use App\Exports\ProductsExport;
 use App\Exports\UsersExport;
@@ -34,5 +35,10 @@ class ExportController extends Controller
     public function exportCategory()
     {
         return Excel::download(new CategoriesExport, 'categories.xlsx');
+    }
+
+    public function exportPdfCart($id)
+    {
+        return Excel::download(new CartUserExport($id), 'carts.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
 }

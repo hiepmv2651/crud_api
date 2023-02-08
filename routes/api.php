@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\CategoryProductsController;
 use App\Http\Controllers\Api\StripeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\SendMailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,11 @@ Route::get('/exportProduct', [ExportController::class, 'exportProduct']);
 
 Route::get('/exportCategory', [ExportController::class, 'exportCategory']);
 
+Route::get('/exportPdfCart/{id}', [ExportController::class, 'exportPdfCart']);
+
 Route::post('/importUser', [ImportController::class, 'importUser']);
+
+Route::post('/sendmail', [SendMailController::class, 'send_mail']);
 
 Route::name('api.')->group(function () {
     // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
