@@ -67,6 +67,8 @@ Route::name('api.')
 
         Route::apiResource('categories', CategoryController::class);
 
+        Route::post('/edit/{product}', [ProductController::class, 'edit']);
+
         // Category Products
         Route::get('/categories/{category}/products', [
             CategoryProductsController::class,
@@ -106,4 +108,6 @@ Route::name('api.')
         Route::post('stripe', [StripeController::class, 'stripePost']);
 
         Route::post('/editUserCart/{id}', [CartController::class, 'editUserCart'])->name('editUserCart');
+
+        Route::post('changpass', [UserController::class, 'updatePass']);
     });

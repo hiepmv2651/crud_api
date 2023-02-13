@@ -87,4 +87,21 @@ class ProductController extends Controller
 
         return response()->noContent();
     }
+
+    public function edit(ProductUpdateRequest $request, Product $product)
+    {
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+
+            $validated['image'] = $request->file('image')->store('logos', 'public');
+        }
+
+        $product->update($validated);
+
+        return new ProductResource($product);
+    }
 }

@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+
 
 class UserController extends Controller
 {
@@ -79,5 +80,27 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
+    }
+
+    public function updatePass(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+
+        $this->validate($request, [
+            'current_password' => ['required', function ($attribute, $value, $fail) use ($user) {
+                if (!Hash::check($value, $user->password)) {
+                    $fail('The current password is incorrect.');
+                }
+            }],
+            'new_password' => ['required', 'string', 'min:8'],
+            'confirm_new_password' => ['required', 'same:new_password'],
+        ]);
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password updated successfully'
+        ], 200);
     }
 }
