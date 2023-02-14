@@ -92,11 +92,11 @@ class UserController extends Controller
                     $fail('The current password is incorrect.');
                 }
             }],
-            'new_password' => ['required', 'string', 'min:8'],
-            'confirm_new_password' => ['required', 'same:new_password'],
+            'password' => ['required', 'string', 'min:8'],
+            'password_confirmation' => ['required', 'same:password'],
         ]);
 
-        $user->password = Hash::make($request->new_password);
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return response()->json([
